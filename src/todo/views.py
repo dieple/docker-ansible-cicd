@@ -7,16 +7,16 @@ from rest_framework.decorators import list_route
 from rest_framework.response import Response
 
 # Create your views here.
-class TodoItemViewSet(viewsets.ModelViewSet)
+class TodoItemViewSet(viewsets.ModelViewSet):
     queryset = TodoItem.objects.all()
     serializer_class = TodoItemSerializer
 
-        def perform_create(self, serializer):
-            # Save instance to gety primary key and then update URL
-            instance = serializer.save()
-            instance.url = reverse('todoitem-detail', args=[instance.pk],request=self.request)
-            instance.save()
+    def perform_create(self, serializer):
+        # Save instance to gety primary key and then update URL
+        instance = serializer.save()
+        instance.url = reverse('todoitem-detail', args=[instance.pk],request=self.request)
+        instance.save()
 
-        def delete(self, request):
-            TodoItem.objects.all().delete() # this is dangerous!!!
-            return Reponse(status=status.HTTP_204_NO_CONTENT)
+    def delete(self, request):
+        TodoItem.objects.all().delete() # this is dangerous!!!
+        return Reponse(status=status.HTTP_204_NO_CONTENT)

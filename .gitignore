@@ -1,5 +1,5 @@
 # Ignore the virtual env
-env
+venv
 
 # Ignore compiled Python source files
 *.pyc
